@@ -19,18 +19,17 @@ public class MainTest {
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("platformVersion", "8.0");
         capabilities.setCapability("deviceName", "AndroidTestDevice");
+        capabilities.setCapability("orientation", "PORTRAIT");
         capabilities.setCapability("appPackage", "org.wikipedia");
         capabilities.setCapability("appActivity", ".main.MainActivity");
         capabilities.setCapability("app", "G:\\github\\MobileAppAutomator\\MobileAppAutomator-Ex07\\apks\\org.wikipedia.apk");
 
         driver = new AppiumDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-        setPortraitScreenOrientation();
     }
 
     @After
     public void tearsDown() {
         if (driver != null) {
-            setPortraitScreenOrientation();
             driver.quit();
         }
     }
@@ -44,11 +43,5 @@ public class MainTest {
     @Test
     public void testAfterScreenRotation() {
         Assert.assertSame(driver.getOrientation(), ScreenOrientation.PORTRAIT);
-    }
-
-    private void setPortraitScreenOrientation() {
-        if (driver.getOrientation() != ScreenOrientation.PORTRAIT) {
-            driver.rotate(ScreenOrientation.PORTRAIT);
-        }
     }
 }
